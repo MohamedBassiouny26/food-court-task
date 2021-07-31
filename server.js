@@ -7,7 +7,7 @@ const storesRouter = require('./routes/storesRouter')
 require("./dbConnection/mongo_connect");
 
 app.use(cors());
-express.json();
+app.use(express.json());
 
 
 app.use('/stores', storesRouter);
