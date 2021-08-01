@@ -14,7 +14,7 @@ async function getStoreByID(req, res) {
     try {
         const { id } = req.params
         const store = await StoreModel.findById(id);
-        if (data)
+        if (store)
             res.json({ message: "Store Data Extracted", data: store });
         else
             res.status(400).json({ message: "Bad Request" })
@@ -41,9 +41,14 @@ async function addStore(req, res) {
 async function editStore(req, res) {
     try {
         const { id } = req.params
-        const store = await StoreModel.findById(id);
-        if (data)
-            res.json({ message: "Store Data Extracted", data: store });
+        const updatedStore = {
+            ...req.body
+        }
+        console.log(updatedStore)
+        const dbResult = await StoreModel.updateOne({ _id: id }, updatedStore);
+        console.log(dbResult)
+        if (dbResult.n)
+            res.json({ message: "Store Data Updated", modified: dbResult.nModified });
         else
             res.status(400).json({ message: "Bad Request" })
     } catch (err) {
