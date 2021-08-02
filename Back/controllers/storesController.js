@@ -7,7 +7,7 @@ async function getStores(req, res) {
         res.json({ message: "Stores Data Extracted", data: stores });
 
     } catch (err) {
-        res.status(500).json({ message: 'Something went wrong', err })
+        res.status(500).json({ message: 'Something went wrong', err });
     }
 }
 async function getStoreByID(req, res) {
@@ -55,10 +55,24 @@ async function editStore(req, res) {
         res.status(500).json({ message: err.message });
     }
 }
+async function deleteStore(req, res) {
+    try {
+        const { id } = req.params
+        const dbResult = await StoreModel.deleteOne({ _id: id });
+        console.log(dbResult)
+        if (dbResult.n)
+            res.json({ message: "Store Deleted", deleted: dbResult.deletedCount });
+        else
+            res.status(400).json({ message: "Bad Request" })
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+}
 
 module.exports = {
     getStores,
     getStoreByID,
     addStore,
-    editStore
+    editStore,
+    deleteStore
 }
