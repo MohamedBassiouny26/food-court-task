@@ -1,0 +1,21 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Cover</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let store of stores">
+      <th scope="row">{{store.StoreName}}</th>
+      <td>{{store.StoreDescription }}</td>
+      <td><img width='100px' [src]="store.StoreLogo" alt=""> </td>
+      <td>
+        <i class="fas fa-pen"></i>
+        <i class="fas fa-trash-alt"></i>
+      </td>
+    </tr>
+  </tbody>
+</table>
