@@ -13,10 +13,13 @@
         <li class="nav-item">
           <a class="nav-link" routerLink='stores' routerLinkActive='active'>Stores List</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link">Control Panel</a>
-        </li>
       </ul>
+      <div class="d-flex">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Add New Store
+        </button>
+      </div>
     </div>
   </div>
 </nav>
+<app-add-store-dialog></app-add-store-dialog>

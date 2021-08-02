@@ -24,6 +24,7 @@ async function getStoreByID(req, res) {
     }
 }
 async function addStore(req, res) {
+    // req.body.StoreID = (await StoreModel.find({}).sort('StoreID').limit(1)).StoreID + 1;
     try {
         const storeInstance = new StoreModel({
             ...req.body
@@ -39,6 +40,7 @@ async function addStore(req, res) {
     }
 }
 async function editStore(req, res) {
+    console.log(req.body)
     try {
         const { id } = req.params
         const updatedStore = {
@@ -61,10 +63,20 @@ async function deleteStore(req, res) {
         const dbResult = await StoreModel.deleteOne({ _id: id });
         console.log(dbResult)
         if (dbResult.n)
-            res.json({ message: "Store Deleted", deleted: dbResult.deletedCount });
+            res.json({ message: "Store Deleted", deletedCount: dbResult.deletedCount });
         else
             res.status(400).json({ message: "Bad Request" })
     } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+}
+async function searchByName(req, res) {
+    try {
+        const searchWord = req.query.q
+        const stores = await StoreModel.find({ StoreName: { $regex: searchWord, $options: 'i' } });
+        res.json({ message: "Search Result iss Found", data: stores });
+    } catch (err) {
+        console.log(err)
         res.status(500).json({ message: err.message });
     }
 }
@@ -74,5 +86,6 @@ module.exports = {
     getStoreByID,
     addStore,
     editStore,
-    deleteStore
+    deleteStore,
+    searchByName
 }

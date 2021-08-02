@@ -1,0 +1,40 @@
+<!-- Modal -->
+<div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Store</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]='storeForm' (ngSubmit)='onSumbit()'>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Store Name</label>
+            <input type="text" class="form-control" id="storeName" formControlName='StoreName'>
+            <p class="text-danger" *ngIf="this.storeControls.StoreName.touched && this.storeControls.StoreName.invalid">
+              Please Enter Valid
+              Name</p>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Store Description</label>
+            <textarea type="text" class="form-control" id="storeDesc" formControlName='StoreDescription'></textarea>
+            <p class="text-danger"
+              *ngIf="this.storeControls.StoreDescription.touched && this.storeControls.StoreDescription.invalid">
+              Please Enter Store Description </p>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Store Cover URL</label>
+            <input type="text" class="form-control" id="storeLogo" formControlName='StoreLogo'>
+            <p class="text-danger" *ngIf="this.storeControls.StoreLogo.touched && this.storeControls.StoreLogo.invalid">
+              Please Add Store Cover URL</p>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" (click)='close.click()'
+              [disabled]="storeForm.invalid">Submit</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" #close>Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
