@@ -24,7 +24,7 @@ async function getStoreByID(req, res) {
     }
 }
 async function addStore(req, res) {
-    // req.body.StoreID = (await StoreModel.find({}).sort('StoreID').limit(1)).StoreID + 1;
+    req.body.StoreID = (await StoreModel.find({}).sort({ field: 'desc', StoreID: -1 }).limit(1))[0].StoreID + 1;
     try {
         const storeInstance = new StoreModel({
             ...req.body
@@ -32,7 +32,7 @@ async function addStore(req, res) {
         const store = await storeInstance.save();
         res.status(201).json({ message: "Store Added Succefully", data: store });
     } catch (err) {
-        console.log(err)
+        // console.log(err)
         if (err._message)
             res.status(400).json({ message: "Bad Request" });
         else
@@ -46,7 +46,6 @@ async function editStore(req, res) {
         const updatedStore = {
             ...req.body
         }
-        console.log(updatedStore)
         const dbResult = await StoreModel.updateOne({ _id: id }, updatedStore);
         console.log(dbResult)
         if (dbResult.n)
