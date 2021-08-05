@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { StoresComponent } from './stores/stores.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/stores' },
+  { path: '', redirectTo: '/stores', pathMatch: "full" },
   { path: 'stores', component: StoresComponent }
 ];
 
