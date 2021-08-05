@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --watch",
     "start": "nodemon server.js"
   },
   "author": "Mohamed Bassiouny",
@@ -15,5 +15,8 @@
     "mongoose": "^5.13.5",
     "mongoose-unique-validator": "^2.0.3",
     "nodemon": "^2.0.12"
+  },
+  "devDependencies": {
+    "jest": "^27.0.6"
   }
 }
